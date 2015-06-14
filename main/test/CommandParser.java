@@ -43,16 +43,27 @@ public class CommandParser
     private void processInputCommand(String commandBody)
     {
         String[] commandArguments = commandBody.split(",");
-        Map<String,String> argumentNameToValueMap = new HashMap<>();
-        for (String argument : commandArguments)
-        {
-            String[] argumentNameAndValue = argument.split("=");
-            String argumentName = argumentNameAndValue[0].trim();
-            String argumentValue = argumentNameAndValue[1].trim();
-            argumentNameToValueMap.put(argumentName, argumentValue);
-        }
+        Map<String,String> argumentNameToValueMap = argumentNameToValueMapFor(commandArguments);
         String barcode = argumentNameToValueMap.get("Barcode");
         int quantity = Integer.parseInt(argumentNameToValueMap.get("Quantity"));
         saleEventListener.itemEntered(barcode, quantity);
+    }
+
+    private Map<String,String> argumentNameToValueMapFor(String[] commandArguments)
+    {
+        Map<String, String> map = new HashMap<>();
+        for (String argument : commandArguments)
+        {
+            addArgument(argument, map);
+        }
+        return map;
+    }
+
+    private void addArgument(String argument, Map<String, String> map)
+    {
+        String[] argumentNameAndValue = argument.split("=");
+        String argumentName = argumentNameAndValue[0].trim();
+        String argumentValue = argumentNameAndValue[1].trim();
+        map.put(argumentName, argumentValue);
     }
 }
