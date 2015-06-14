@@ -12,10 +12,10 @@ public class RegisterTests
     public void receipt_total_for_a_sale_with_no_items_should_be_zero()
     {
         Register register = new Register();
-        ReceiptPrinter receiptPrinter = context.mock(ReceiptPrinter.class);
+        ReceiptReceiver receiptReceiver = context.mock(ReceiptReceiver.class);
         context.checking(new Expectations()
         {{
-                oneOf(receiptPrinter).printTotalDue("0.00");
+            oneOf(receiptReceiver).receiveTotalDue("0.00");
         }});
 
         register.newSaleInitiated();
