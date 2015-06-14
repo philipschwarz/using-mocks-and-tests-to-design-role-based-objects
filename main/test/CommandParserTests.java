@@ -14,7 +14,7 @@ public class CommandParserTests
     public void notifies_listener_of_new_sale_event()
     {
         final SaleEventListener saleEventListener = context.mock(SaleEventListener.class);
-        CommandParser commandParser = new CommandParser();
+        CommandParser commandParser = new CommandParser(saleEventListener);
         String newSaleCommand = "Command:NewSale";
         context.checking(new Expectations() {{
             oneOf (saleEventListener).newSaleInitiated();
