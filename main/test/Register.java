@@ -16,7 +16,7 @@ public class Register implements SaleEventListener
     @Override
     public void saleCompleted()
     {
-        receiptReceiver.receiveTotalDue(0.00);
+        receiptReceiver.receiveTotalDue(new Money(0.00));
     }
 
     @Override

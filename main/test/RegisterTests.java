@@ -13,9 +13,10 @@ public class RegisterTests
     {
         ReceiptReceiver receiptReceiver = context.mock(ReceiptReceiver.class);
         Register register = new Register(receiptReceiver);
+        Money amountDue = new Money(0.00);
         context.checking(new Expectations()
         {{
-            oneOf(receiptReceiver).receiveTotalDue(0.00);
+            oneOf(receiptReceiver).receiveTotalDue(amountDue);
         }});
 
         register.newSaleInitiated();

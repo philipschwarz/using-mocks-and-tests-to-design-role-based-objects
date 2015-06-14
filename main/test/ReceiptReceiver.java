@@ -1,4 +1,4 @@
 public interface ReceiptReceiver
 {
-    void receiveTotalDue(double amount);
+    void receiveTotalDue(Money amount);
 }
