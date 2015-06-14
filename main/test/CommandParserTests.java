@@ -22,4 +22,17 @@ public class CommandParserTests
 
         commandParser.parse(newSaleCommand);
     }
+
+    @Test
+    public void notifies_listener_of_sale_completed_event() throws Exception
+    {
+        final SaleEventListener saleEventListener = context.mock(SaleEventListener.class);
+        CommandParser commandParser = new CommandParser(saleEventListener);
+        String endSaleCommand = "Command:EndSale";
+        context.checking(new Expectations() {{
+            oneOf (saleEventListener).saleCompleted();
+        }});
+
+        commandParser.parse(endSaleCommand);
+    }
 }
