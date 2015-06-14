@@ -47,9 +47,10 @@ public class CommandParserTests
     public void notifies_listener_of_item_and_quantity_entered() throws Exception
     {
         String message = "Input: Barcode=100008888559, Quantity =1";
-
+        ItemId expectedItemId = new ItemId("100008888559");
+        Quantity expectedQuantity = new Quantity(1);
         context.checking(new Expectations() {{
-            oneOf (saleEventListener).itemEntered("100008888559",1);
+            oneOf (saleEventListener).itemEntered(expectedItemId, expectedQuantity);
         }});
 
         commandParser.parse(message);

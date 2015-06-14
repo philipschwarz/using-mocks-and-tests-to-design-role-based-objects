@@ -4,5 +4,5 @@ public interface SaleEventListener
 
     void saleCompleted();
 
-    void itemEntered(String barcode, int quantity);
+    void itemEntered(ItemId barcode, Quantity quantity);
 }

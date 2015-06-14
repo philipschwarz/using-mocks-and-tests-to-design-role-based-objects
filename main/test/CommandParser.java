@@ -46,7 +46,7 @@ public class CommandParser
         Map<String,String> argumentNameToValueMap = argumentNameToValueMapFor(commandArguments);
         String barcode = argumentNameToValueMap.get("Barcode");
         int quantity = Integer.parseInt(argumentNameToValueMap.get("Quantity"));
-        saleEventListener.itemEntered(barcode, quantity);
+        saleEventListener.itemEntered(new ItemId(barcode), new Quantity(quantity));
     }
 
     private Map<String,String> argumentNameToValueMapFor(String[] commandArguments)
