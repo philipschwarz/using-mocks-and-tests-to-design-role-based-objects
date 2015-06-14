@@ -25,4 +25,10 @@ public class ItemId
     {
         return barcode.hashCode();
     }
+
+    @Override
+    public String toString()
+    {
+        return "ItemId:{barcode="+barcode+"}";
+    }
 }
