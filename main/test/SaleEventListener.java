@@ -1,4 +1,6 @@
 public interface SaleEventListener
 {
-    public void newSaleInitiated();
+    void newSaleInitiated();
+
+    void saleCompleted();
 }
