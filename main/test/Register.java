@@ -1,6 +1,7 @@
 public class Register implements SaleEventListener
 {
     private final ReceiptReceiver receiptReceiver;
+    private boolean hasASaleInprogress;
 
     public Register(ReceiptReceiver receiptReceiver)
     {
@@ -10,13 +11,16 @@ public class Register implements SaleEventListener
     @Override
     public void newSaleInitiated()
     {
-
+        hasASaleInprogress = true;
     }
 
     @Override
     public void saleCompleted()
     {
-        receiptReceiver.receiveTotalDue(new Money(0.00));
+        if (hasASaleInprogress)
+        {
+            receiptReceiver.receiveTotalDue(new Money(0.00));
+        }
     }
 
     @Override
