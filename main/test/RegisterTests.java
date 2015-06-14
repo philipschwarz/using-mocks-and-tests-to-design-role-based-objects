@@ -11,8 +11,8 @@ public class RegisterTests
     @Test
     public void receipt_total_for_a_sale_with_no_items_should_be_zero()
     {
-        Register register = new Register();
         ReceiptReceiver receiptReceiver = context.mock(ReceiptReceiver.class);
+        Register register = new Register(receiptReceiver);
         context.checking(new Expectations()
         {{
             oneOf(receiptReceiver).receiveTotalDue("0.00");
