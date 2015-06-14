@@ -15,7 +15,7 @@ public class RegisterTests
         Register register = new Register(receiptReceiver);
         context.checking(new Expectations()
         {{
-            oneOf(receiptReceiver).receiveTotalDue("0.00");
+            oneOf(receiptReceiver).receiveTotalDue(0.00);
         }});
 
         register.newSaleInitiated();
