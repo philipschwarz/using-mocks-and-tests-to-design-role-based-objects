@@ -44,4 +44,27 @@ public class RegisterTests
 
         register.saleCompleted();
     }
+
+    @Test
+    public void should_calculate_receipt_for_sale_with_multiple_items_of_single_quantity() throws Exception
+    {
+        ItemId itemId_1 = new ItemId("000000001");
+        ItemId itemId_2 = new ItemId("000000002");
+        ProductDescription descriptionForItemWithId1 = new ProductDescription("description 1", new Money(3.00));
+        ProductDescription descriptionForItemWithId2 = new ProductDescription("description 2", new Money(7.00));
+        Quantity single_item = new Quantity(1);
+        final Money amountDue = new Money(10.0);
+        final ProductCatalog productCatalog = context.mock(ProductCatalog.class);
+        context.checking(new Expectations()
+        {{
+            oneOf(productCatalog).productDescriptionFor(itemId_1);
+            oneOf(productCatalog).productDescriptionFor(itemId_2);
+            oneOf(receiptReceiver).receiveTotalDue(amountDue);
+        }});
+
+        register.newSaleInitiated();
+        register.itemEntered(itemId_1, single_item);
+        register.itemEntered(itemId_2, single_item);
+        register.saleCompleted();
+    }
 }

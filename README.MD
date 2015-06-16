@@ -1,0 +1,1 @@
+Go through "Using "Mocks And Tests To Design Role-Based Objects" https://msdn.microsoft.com/en-ca/magazine/dd882516.aspx (using Java)
