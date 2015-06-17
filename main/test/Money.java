@@ -27,6 +27,11 @@ public class Money
         return (int) (temp ^ (temp >>> 32));
     }
 
+    public Money plus(Money other)
+    {
+        return new Money(this.amount + other.amount);
+    }
+
     @Override
     public String toString()
     {
