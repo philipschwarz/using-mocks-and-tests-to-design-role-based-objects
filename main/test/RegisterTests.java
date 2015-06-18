@@ -4,7 +4,6 @@ import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import static org.jmock.Expectations.any;
 
 public class RegisterTests
 {
