@@ -5,8 +5,7 @@ public class Register implements SaleEventListener
 {
     private final ReceiptReceiver receiptReceiver;
     private final ProductCatalog productCatalog;
-    private List<ProductDescription> purchasedProducts = new ArrayList<ProductDescription>();
-    private boolean hasASaleInprogress;
+    private Sale sale;
 
     public Register(ReceiptReceiver receiptReceiver, ProductCatalog productCatalog)
     {
@@ -17,26 +16,21 @@ public class Register implements SaleEventListener
     @Override
     public void newSaleInitiated()
     {
-        hasASaleInprogress = true;
+        sale = new Sale();
     }
 
     @Override
     public void saleCompleted()
     {
-        if (hasASaleInprogress)
+        if (sale != null)
         {
-            Money total = new Money(0.0);
-            for ( ProductDescription productDescription : purchasedProducts )
-            {
-                total = total.plus(productDescription.getUnitPrice());
-            }
-            receiptReceiver.receiveTotalDue(total);
+            sale.sendReceiptTo(receiptReceiver);
         }
     }
 
     @Override
     public void itemEntered(ItemId barcode, Quantity quantity)
     {
-        purchasedProducts.add(productCatalog.productDescriptionFor(barcode));
+        sale.purchaseItemWith(productCatalog.productDescriptionFor(barcode));
     }
 }
